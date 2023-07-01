@@ -1,0 +1,114 @@
+.Btn {
+  background: lightgray;
+  border: 1px solid black;
+  color: black;
+  outline: none;
+}
+.Btn_Dang {
+  background: firebrick;
+}
+.Btn_Dang.Btn_Slcted {
+  background: darkred;
+}
+.Btn_Slcted {
+  background: dimgray;
+}
+
+.Pnl-Header {
+  align-items: center;
+  background: darkgray;
+  border-bottom: 1px solid black;
+  column-gap: 1vw;
+  display: flex;
+  flex-flow: wrap;
+  height: 20%;
+  overflow: auto;
+  padding: 0 1vw;
+}
+
+.Pnl-Sect {
+  background: darkgray;
+  border-left: 1px solid black;
+  flex: 1;
+  height: 100%;
+}
+.Pnl-Sect:first-child {
+  border-left: none;
+}
+.Pnl-Sect_Blked {
+  background: gray;
+}
+.Pnl-SectItemList {
+  height: 80%;
+  list-style: none;
+  margin: 0;
+  overflow: auto;
+  padding: 0;
+}
+.Pnl-SectLbl {
+  border-bottom: 1px solid black;
+  display: inline-block;
+  height: 20px;
+  line-height: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.Pnl-ActSect {
+  column-gap: 1vw;
+  display: flex;
+}
+.Pnl-Body {
+  background: gray;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80%;
+  overflow: auto;
+}
+.Pnl-Btn {
+  height: 20px;
+  width: 70px;
+}
+.Pnl-Btn_Size_Big {
+  width: 140px;
+}
+.Pnl-Btn_Vert {
+  margin: 0.6vh auto;
+  display: block;
+}
+.Pnl-TextInput {
+  flex: 1;
+  height: 20px;
+}
+
+.Root {
+  height: 100%;
+}
+.Root-Pnl {
+  height: 20%;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: gohu;
+  font-size: 11px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+canvas {
+  display: block;
+}
+
+@font-face {
+  font-family: gohu;
+  src: url("/font/gohufont-11.ttf") format("truetype");
+}
+
+/*# sourceMappingURL=pref-ed-style.css.map */

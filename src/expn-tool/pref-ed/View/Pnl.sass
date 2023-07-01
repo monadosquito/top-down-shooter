@@ -1,0 +1,31 @@
+@use 'PnlHeader'
+@use 'PnlSect'
+
+
+.Pnl
+    &-ActSect
+        column-gap: 1vw
+        display: flex
+
+    &-Body
+        background: gray
+        display: flex
+        flex-wrap: wrap
+        height: 80%
+        overflow: auto
+
+    &-Btn
+        height: 20px
+        width: 70px
+
+        &_Size
+            &_Big
+                width: 140px
+
+        &_Vert
+            margin: 0.6vh auto
+            display: block
+
+    &-TextInput
+        flex: 1
+        height: 20px
