@@ -10,18 +10,19 @@ import Bem.Init
 import Bem.Miso.View.Html
 import Miso
 import Miso.String
+import Bem.Miso.Utl.Utl
 
 
 pnlSect :: Lbl -> [ListItem trigGrpingCritType] -> Elem
 pnlSect lbl listItems
     =
-    _elem viewGens (NonVoidHtmlElem section_)
+    Bem.Init._elem viewGens (NonVoidHtmlElem section_)
         ( []
-        , [ _noModsElem viewGens (NonVoidHtmlElem label_)
+        , [ noModsElem (NonVoidHtmlElem label_)
                 ([], [text lbl])
                 Pnl
                 Pnl_SectLbl
-          , _noModsElem viewGens (NonVoidHtmlElem ul_)
+          , noModsElem (NonVoidHtmlElem ul_)
                 ([], listItems)
                 Pnl
                 Pnl_SectItemList

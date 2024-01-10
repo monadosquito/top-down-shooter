@@ -23,6 +23,7 @@ import Data.Map
 import Data.Maybe
 import Miso
 import Miso.String
+import Bem.Miso.Utl.Utl
 
 
 mkPnl :: MkNoModsBlk
@@ -32,7 +33,7 @@ mkPnl = do
     slctedPref' <- asks (^. Lens.slctedPref)
     slctedPrefBodyEdAct' <- asks (^. Lens.slctedPrefBodyEdAct)
     slctedPrefCopy' <- asks (^. Lens.slctedPrefCopy)
-    _mkNoModsBlk viewGens (NonVoidHtmlElem div_)
+    mkNoModsBlkElem (NonVoidHtmlElem div_)
         ( []
         , [ pnlHeader
                 "Prefabs"
@@ -40,7 +41,7 @@ mkPnl = do
                 slctedPrefCopy'
                 (elems Pref.prefs)
                 [ option_ [disabled_ True] [text "Prefab type"]
-                , _noElemModsMix viewGens (NonVoidHtmlElem option_)
+                , blkNoModsElem (NonVoidHtmlElem option_)
                       ( [ value_ . ms . show
                               $ (Pref.StaticPrefab
                                      (Pref.PrefabIdentity mempty mempty)
@@ -56,7 +57,7 @@ mkPnl = do
                       )
                       Pnl
                       Pnl_Btn
-                , _noElemModsMix viewGens (NonVoidHtmlElem option_)
+                , blkNoModsElem (NonVoidHtmlElem option_)
                       ( [ value_ . ms . show
                               $ (Pref.LifefulPrefab
                                     (Pref.PrefabWithProperties
@@ -78,11 +79,11 @@ mkPnl = do
                 ]
                 Pnl
                 Pnl_Header
-            , _noModsElem viewGens (NonVoidHtmlElem section_)
+            , noModsElem (NonVoidHtmlElem section_)
                 ( []
                 , [ pnlSect
                         "Trigger"
-                        [ _noBlkModsMix viewGens (NonVoidHtmlElem select_)
+                        [ noModsBlkElem (NonVoidHtmlElem select_)
                               ( [onInput $ OnlySimpAct . UnsafeSlctXAct]
                               ,
                                   [ option_
@@ -91,8 +92,7 @@ mkPnl = do
                                               $ isNothing mbSlctedInsTrigAct
                                         ]
                                         [text "Inside action"]
-                                  , _noElemModsMix
-                                        viewGens
+                                  , blkNoModsElem
                                         (NonVoidHtmlElem option_)
                                         ( [value_ . ms $ show KeepEnemiesAway]
                                         , [text "Keep enemies away"]
@@ -105,8 +105,7 @@ mkPnl = do
                                         )
                                         Pnl
                                         Pnl_Btn
-                                  , _noElemModsMix
-                                        viewGens
+                                  , blkNoModsElem
                                         (NonVoidHtmlElem option_)
                                         ( [value_ . ms $ show KeepEveryoneAway]
                                         , [text "Keep everyone away"]
@@ -125,7 +124,7 @@ mkPnl = do
                               Pnl
                               Pnl_Btn
                               [PnlBtn_Size Big, PnlBtn_Vert]
-                        , _noBlkModsMix viewGens (NonVoidHtmlElem select_)
+                        , noModsBlkElem (NonVoidHtmlElem select_)
                               ( [onInput $ OnlySimpAct . UnsafeSlctHumanPose]
                               , [ option_
                                       [ disabled_ True
@@ -144,7 +143,7 @@ mkPnl = do
                               Pnl
                               Pnl_Btn
                               [PnlBtn_Size Big, PnlBtn_Vert]
-                        , _noBlkModsMix viewGens (NonVoidHtmlElem select_)
+                        , noModsBlkElem (NonVoidHtmlElem select_)
                               ( [onInput $ OnlySimpAct . UnsafeSlctSingTrig]
                               ,
                                   [ option_
@@ -194,7 +193,7 @@ mkPnl = do
                               Pnl
                               Pnl_Btn
                               [PnlBtn_Size Big, PnlBtn_Vert]
-                           , _noBlkModsMix viewGens (NonVoidHtmlElem select_)
+                           , noModsBlkElem (NonVoidHtmlElem select_)
                                  ( [ onInput
                                          $ OnlySimpAct
                                          . UnsafeSlctPrefBodyEdAct
@@ -202,7 +201,7 @@ mkPnl = do
                                  , [ option_
                                          [disabled_ True, selected_ True]
                                          [text "Grouping criterion"]
-                                   , _noModsMix viewGens (NonVoidHtmlElem option_)
+                                   , noModsBlkNoModsElem (NonVoidHtmlElem option_)
                                          ( [ value_ . ms . show
                                                  $ AddTrigGrp
                                                        (SameHorizontalSizeGroupCommon
@@ -214,7 +213,7 @@ mkPnl = do
                                          Btn
                                          Pnl
                                          Pnl_Btn
-                                   , _noModsMix viewGens (NonVoidHtmlElem option_)
+                                   , noModsBlkNoModsElem (NonVoidHtmlElem option_)
                                          ( [ value_ . ms . show
                                                  $ AddTrigGrp
                                                        (SameVerticalSizeGroupCommon
@@ -232,7 +231,7 @@ mkPnl = do
                                  Pnl
                                  Pnl_Btn
                                  [PnlBtn_Size Big, PnlBtn_Vert]
-                           , _noBlkModsMix viewGens (NonVoidHtmlElem button_)
+                           , noModsBlkElem (NonVoidHtmlElem button_)
                                  ( [onClick $ OnlySimpAct RlsTrigGrp]
                                  , [text "Release group"]
                                  )
@@ -257,7 +256,7 @@ mkPnl = do
                                      . Lens.runSpeed
                                  of
                                  Just runSpd ->
-                                     [ _noModsMix viewGens (VoidHtmlElem input_)
+                                     [ noModsBlkNoModsElem (VoidHtmlElem input_)
                                            [ onInput
                                                  $ OnlySimpAct
                                                  . AltSlctedLiflPrefRunSpd

@@ -6,7 +6,7 @@
 module Bem.Init
     ( module Bem.Blk
     , module Bem.Init
-    , module Bem.Miso.View.Cfg
+    , module Bem.Miso.View.Mk.Cfg
     ) where
 
 
@@ -15,15 +15,15 @@ import Bem.Blk
 import Mdl
 
 import Bem.Cfg.Cfg
-import Bem.Miso.View.Cfg
-import qualified Bem.Miso.Utl.Utl as Bem
-import qualified Bem.Miso.View.Cfg as Bem
+import Bem.Miso.View.Mk.Cfg
+import qualified Bem.Miso.Utl.Utl as Utl
+import qualified Bem.Miso.View.Mk.Cfg as Bem
 
 
 viewGens :: Bem.Mks Act' Mdl
 viewGens
     =
-    Bem.init defCfg { _partSep = "AAA"
+    Bem.init defCfg { _partSep = "-"
                     }
 
 
@@ -40,13 +40,13 @@ viewGens
 -- type NoElemModsMix isAlsoDomAct trigGrpCrit = Bem.NoElemModsMix (Act Double isAlsoDomAct trigGrpCrit) Blk
 -- type NoModsMix isAlsoDomAct trigGrpCrit = Bem.NoModsMix (Act Double isAlsoDomAct trigGrpCrit) Blk
 
-type MkBlk = Bem.MkBlk Act' Mdl
+type MkBlk = Utl.MkBlkElem' Act' Mdl
 -- type MkNoBlkModsBlk isAlsoDomAct trigGrpCrit = Bem.MkNoBlkModsBlk (Act Double isAlsoDomAct) Mdl Blk
 -- type MkNoElemModsBlk isAlsoDomAct trigGrpCrit = Bem.MkNoElemModsBlk (Act Double isAlsoDomAct) Mdl Blk
-type MkNoModsBlk = Bem.MkNoModsBlk Act' Mdl
+type MkNoModsBlk = Utl.MkNoModsBlkElem' Act' Mdl
 -- 
-type Elem = Bem.Elem Act'
-type NoModsElem = Bem.NoModsElem Act'
+type Elem = Utl.Elem' Act'
+type NoModsElem = Utl.NoModsElem' Act'
 -- 
 -- type Mix isAlsoDomAct trigGrpCrit = Bem.Mix (Act Double isAlsoDomAct) Blk
 -- type NoBlkModsMix isAlsoDomAct trigGrpCrit = Bem.NoBlkModsMix (Act Double isAlsoDomAct) Blk

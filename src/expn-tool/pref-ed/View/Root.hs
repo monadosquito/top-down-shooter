@@ -18,7 +18,7 @@ import Bem.Miso.Utl.Utl
 
 root :: Reader Mdl (View Act')
 root = do
-    GenNoModsBlk pnl <- mkPnl
+    NoModsBlkElem pnl <- mkPnl
     return $ div_
                  [class_ "Root"]
-                 [canvas_ [id_ "canv"] [], pnl Pnl Root Root_Pnl]
+                 [canvas_ [id_ "canv"] [], pnl Pnl Root Root_Pnl []]

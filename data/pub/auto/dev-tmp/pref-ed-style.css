@@ -1,20 +1,20 @@
-.Btn {
+.btn {
   background: lightgray;
   border: 1px solid black;
   color: black;
   outline: none;
 }
-.Btn_Dang {
+.btn_dang {
   background: firebrick;
 }
-.Btn_Dang.Btn_Slcted {
+.btn_dang.btn_slcted {
   background: darkred;
 }
-.Btn_Slcted {
+.btn_slcted {
   background: dimgray;
 }
 
-.Pnl-Header {
+.pnl__header {
   align-items: center;
   background: darkgray;
   border-bottom: 1px solid black;
@@ -26,26 +26,26 @@
   padding: 0 1vw;
 }
 
-.Pnl-Sect {
+.pnl__sect {
   background: darkgray;
   border-left: 1px solid black;
   flex: 1;
   height: 100%;
 }
-.Pnl-Sect:first-child {
+.pnl__sect:first-child {
   border-left: none;
 }
-.Pnl-Sect_Blked {
+.pnl__sect_Blked {
   background: gray;
 }
-.Pnl-SectItemList {
+.pnl__sect-item-list {
   height: 80%;
   list-style: none;
   margin: 0;
   overflow: auto;
   padding: 0;
 }
-.Pnl-SectLbl {
+.pnl__sect-lbl {
   border-bottom: 1px solid black;
   display: inline-block;
   height: 20px;
@@ -54,37 +54,37 @@
   width: 100%;
 }
 
-.Pnl-ActSect {
+.pnl__act-sect {
   column-gap: 1vw;
   display: flex;
 }
-.Pnl-Body {
+.pnl__body {
   background: gray;
   display: flex;
   flex-wrap: wrap;
   height: 80%;
   overflow: auto;
 }
-.Pnl-Btn {
+.pnl__btn {
   height: 20px;
   width: 70px;
 }
-.Pnl-Btn_Size_Big {
+.pnl__btn_size_big {
   width: 140px;
 }
-.Pnl-Btn_Vert {
+.pnl__btn_vert {
   margin: 0.6vh auto;
   display: block;
 }
-.Pnl-TextInput {
+.pnl__text-input {
   flex: 1;
   height: 20px;
 }
 
-.Root {
+.root {
   height: 100%;
 }
-.Root-Pnl {
+.root__pnl {
   height: 20%;
 }
 

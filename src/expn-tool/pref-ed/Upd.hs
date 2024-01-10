@@ -26,7 +26,6 @@ import Control.Monad.IO.Class
 import Data.IORef
 import Data.List.Split
 import Data.Maybe
-import GHC.Natural
 import GHCJS.DOM
 import GHCJS.DOM.Element
 import GHCJS.DOM.EventTargetClosures
@@ -255,7 +254,7 @@ upd mCtxIoRef act
                         . at (Reaction slctedPlayerIsInsTrigAct' slctedPose')
                         . _Just
                         %= (^.. folded
-                            . ifiltered (\ix' _ -> ix' /= naturalToInt trigIx)
+                            . ifiltered (\ix' _ -> ix' /= fromIntegral trigIx)
                            )
                     slctedPref
                         . _LifefulPrefab
@@ -270,7 +269,7 @@ upd mCtxIoRef act
                         . at (Reaction slctedPlayerIsInsTrigAct' slctedPose')
                         . _Just
                         %= (^.. folded
-                            . ifiltered (\ix' _ -> ix' /= naturalToInt trigIx)
+                            . ifiltered (\ix' _ -> ix' /= fromIntegral trigIx)
                            )
                     slctedPref
                         . _StaticPrefab
@@ -284,7 +283,7 @@ upd mCtxIoRef act
                                            (mCtx ^. scn)
                                            "trigGzms"
                         trigGzms <- Three.children trigGzmsGrp
-                        toDelTrigGzm <- trigGzms Jsaddle.!! naturalToInt trigIx
+                        toDelTrigGzm <- trigGzms Jsaddle.!! fromIntegral trigIx
                         Three.rmFromPrnt toDelTrigGzm
                         mbLastTrigGzm <- JsApi.last trigGzms
                         Three.rmFromPrnt $ fromJust mbLastTrigGzm
@@ -719,7 +718,7 @@ upd mCtxIoRef act
                                                                                                (cfg
                                                                                                     ^. sectSegQnt
                                                                                                     . to
-                                                                                                          naturalToInt
+                                                                                                          fromIntegral
                                                                                                )
                                                                                                0
                                                                                                tau
@@ -1202,7 +1201,7 @@ upd mCtxIoRef act
                                                                                                ( (cfg
                                                                                                       ^. sectSegQnt
                                                                                                       . to
-                                                                                                            naturalToInt
+                                                                                                            fromIntegral
                                                                                                  )
                                                                                                * circTrigToPntrDist
                                                                                                )
@@ -1569,7 +1568,7 @@ upd mCtxIoRef act
                           . to fromIntegral
                         / 2
                         )
-                        ( cfg ^. sectSegQnt . to naturalToInt
+                        ( cfg ^. sectSegQnt . to fromIntegral
                         * (read . (: []) . last . show
                                $ theta
                                / (-tau / cfg ^. sectSegQnt . to fromIntegral)
@@ -1607,7 +1606,7 @@ upd mCtxIoRef act
         = do
         circTrigGzmGeom <- Three.circGeom
                                r
-                               (cfg ^. sectSegQnt . to naturalToInt * round r)
+                               (cfg ^. sectSegQnt . to fromIntegral * round r)
                                0
                                tau
         circTrigGzmMat <- gzmMat circTrigGzmClr

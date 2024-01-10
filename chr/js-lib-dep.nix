@@ -1,17 +1,18 @@
 data:
 let
-    inherit (import ./pin.nix) pkgs;
+    pin = import ./pin.nix;
+    nixpkgs = import pin.nixpkgs {};
 in
-pkgs.stdenv.mkDerivation
+nixpkgs.stdenv.mkDerivation
 {
-    installPhase = pkgs.lib.readFile ../script/instl-js-lib-dep.sh;
+    installPhase = nixpkgs.lib.readFile ../script/instl-js-lib-dep.sh;
     jsLibDeps =
         [
-            (pkgs.nodePackages.three.overrideAttrs
+            (nixpkgs.nodePackages.three.overrideAttrs
                 (oldAttrs:
                     {
                         installPhase = oldAttrs.installPhase
-                            + pkgs.lib.readFile ../script/three-instl-hook.sh;
+                            + nixpkgs.lib.readFile ../script/three-instl-hook.sh;
                         name = "three";
                     }
                 )

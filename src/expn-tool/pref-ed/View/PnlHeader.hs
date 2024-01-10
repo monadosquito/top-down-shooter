@@ -15,6 +15,7 @@ import Control.Applicative
 import Control.Lens
 import Miso
 import qualified Miso.String as Ms
+import Bem.Miso.Utl.Utl
 
 
 pnlHeader
@@ -26,17 +27,16 @@ pnlHeader
     -> NoModsElem
 pnlHeader prefMenuLbl slctedPref' slctedPrefBackup' prefs prefTypeOpts
     =
-    _noModsElem viewGens (NonVoidHtmlElem header_)
+    noModsElem (NonVoidHtmlElem header_)
         ( []
-        , [ _noModsMix viewGens (NonVoidHtmlElem select_)
+        , [ noModsBlkNoModsElem (NonVoidHtmlElem select_)
                 ( [onInput $ OnlySimpAct . SlctPref]
                 , case traverse (fmap Ms.ms . viewPrefName) prefs of
                       Just prefNames ->
                           prefMenuLblOpt
                           : map
                                 (\prefName' ->
-                                     _noElemModsMix
-                                         viewGens
+                                     blkNoModsElem
                                          (NonVoidHtmlElem option_)
                                          ([], [text prefName'])
                                          Btn
@@ -59,7 +59,7 @@ pnlHeader prefMenuLbl slctedPref' slctedPrefBackup' prefs prefTypeOpts
           ]
           ++ case viewPrefName slctedPref' of
                  Just slctedPrefName ->
-                     [ _noModsMix viewGens (VoidHtmlElem input_)
+                     [ noModsBlkNoModsElem (VoidHtmlElem input_)
                            [ id_ "slctedPrefName"
                            , onInput
                                  $ OnlySimpAct
@@ -75,23 +75,23 @@ pnlHeader prefMenuLbl slctedPref' slctedPrefBackup' prefs prefTypeOpts
                  Nothing -> []
           ++ if null prefTypeOpts
              then []
-             else [ _noModsMix viewGens (NonVoidHtmlElem select_)
+             else [ noModsBlkNoModsElem (NonVoidHtmlElem select_)
                         ([onInput $ OnlySimpAct . SlctPrefType], prefTypeOpts)
                         Btn
                         Pnl
                         Pnl_Btn
                   ]
-          ++ [ _noModsElem viewGens (NonVoidHtmlElem section_)
+          ++ [ noModsElem (NonVoidHtmlElem section_)
                    ( []
                    , (if slctedPref' == slctedPrefBackup'
                       then
-                          _noModsMix viewGens (NonVoidHtmlElem button_)
+                          noModsBlkNoModsElem (NonVoidHtmlElem button_)
                               ([], [text "Save"])
                               Btn
                               Pnl
                               Pnl_Btn
                       else
-                          _noElemModsMix viewGens (NonVoidHtmlElem button_)
+                          blkNoModsElem (NonVoidHtmlElem button_)
                               ([onClick $ OnlySimpAct SavePref], [text "Save"])
                               Btn
                               [Dang]
@@ -100,8 +100,7 @@ pnlHeader prefMenuLbl slctedPref' slctedPrefBackup' prefs prefTypeOpts
                      )
                      : case viewPrefName slctedPref' of
                             Just slctedPrefName ->
-                                [ _noElemModsMix
-                                      viewGens
+                                [ blkNoModsElem
                                       (NonVoidHtmlElem button_)
                                       ( [ onClick
                                               $ OnlySimpAct
@@ -125,7 +124,7 @@ pnlHeader prefMenuLbl slctedPref' slctedPrefBackup' prefs prefTypeOpts
   where
     prefMenuLblOpt
         =
-        _noModsElem viewGens (NonVoidHtmlElem option_)
+        noModsElem (NonVoidHtmlElem option_)
             ([disabled_ True, selected_ True], [text prefMenuLbl])
             Pnl
             Pnl_PrefMenuLbl

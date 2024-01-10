@@ -1,25 +1,19 @@
 let
-    # inherit (import ./chr/pin.nix) pkgs;
-    # bem
-    #     =
-    #     import (fetchTarball
-    #         "https://github.com/monadosquito/bem/archive/f6446141daac31ff0ace748d8bdc4bd25d8bd109.tar.gz") {};
     pin = import ./chr/pin.nix;
-    misoPkgs = pin.misoPkgs;
+    nixpkgs = import pin.nixpkgs {inherit config;};
     bem = import ../bem {};
     misoBem = import ../miso-bem;
-    comm = import ./chr/comm.nix pkgs;
-    pkgs =
-        import (fetchTarball
-            https://github.com/NixOS/nixpkgs/archive/4d2b37a84fad1091b9de401eb450aae66f1a741e.tar.gz) {};
+    comm = import ./chr/comm.nix nixpkgs;
+    config = {
+        allowBroken = true;
+    };
 in
-pkgs.mkShell
+nixpkgs.mkShell
 {
     buildInputs
         =
         [
-            # (pkgs.haskell.packages.ghc8107.ghcWithPackages
-            (misoPkgs.haskell.packages.ghc865.ghcWithPackages
+            (nixpkgs.haskellPackages.ghcWithPackages
                  (pkgs: with pkgs;
                       [
                           bem
@@ -36,23 +30,23 @@ pkgs.mkShell
                       ]
                  )
             )
-            (pkgs.writeShellScriptBin
+            (nixpkgs.writeShellScriptBin
                  "gcroot-dev-deps-outs"
-                 (pkgs.lib.readFile ./script/gcroot-dev-deps-outs.sh)
+                 (nixpkgs.lib.readFile ./script/gcroot-dev-deps-outs.sh)
             )
-            (pkgs.writeShellScriptBin
+            (nixpkgs.writeShellScriptBin
                  "unit-test"
-                 (pkgs.lib.readFile ./script/test.sh)
+                 (nixpkgs.lib.readFile ./script/test.sh)
             )
-            (pkgs.writeShellScriptBin
+            (nixpkgs.writeShellScriptBin
                  "watch"
-                 (pkgs.lib.readFile ./script/watch.sh)
+                 (nixpkgs.lib.readFile ./script/watch.sh)
             )
-            pkgs.ghcid
+            nixpkgs.ghcid
         ]
         ++ comm.deps.execs;
     jsDepStorePaths = comm.deps.lclDrvs.jsLibDep.jsLibDeps;
-    shellHook = pkgs.lib.readFile ./script/shell-hook.sh;
+    shellHook = nixpkgs.lib.readFile ./script/shell-hook.sh;
     usedJsDepScriptLclPaths
         =
         [
